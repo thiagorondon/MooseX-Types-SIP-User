@@ -8,14 +8,11 @@ use MooseX::Types::Moose qw(Str);
 
 sub _validate_sip_user {
     my ($str) = @_;
-    return $str =~ /sip:*@*/ ? 1 : 0; ;
+    return $str =~ /sip[s]:.*@.*/ ? 1 : 0; ;
 }
 
 subtype SipUser,
     as Str, where { _validate_sip_user($_) };
-
-coerce SipUser
-    from Str, via { uc };
 
 __END__
 
